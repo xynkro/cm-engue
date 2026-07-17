@@ -4,161 +4,258 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C.M Engue — author of 25 Things I Wished I Knew at 25</title>
-<meta name="description" content="C.M Engue writes about the things most people take a decade to figure out. His first book, 25 Things I Wished I Knew at 25, is a confession written as a letter to his younger sister.">
+<meta name="description" content="C.M Engue writes about the things most people take a decade to figure out. 25 Things I Wished I Knew at 25 — not a self-help book. A confession.">
 <meta property="og:title" content="C.M Engue — author">
 <meta property="og:description" content="25 Things I Wished I Knew at 25 — not a self-help book. A confession.">
+<meta property="og:image" content="https://xynkro.github.io/cm-engue/assets/pier.jpg">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F2F1EC; --ink:#20221F; --red:#A6251D;
-    --pencil:#75766D; --rule:#D9D8CF;
+    --night:#0E1116; --night2:#131720; --paper:#EDEAE2; --dim:#9A978D;
+    --ember:#E04A32; --ember-deep:#B23422; --rule:#262B35;
     --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-    --serif:'Newsreader',Georgia,'Times New Roman',serif;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --paper:#191A17; --ink:#E8E7DF; --red:#E0564A; --pencil:#8B8C82; --rule:#33342E; }
+    --serif:'Newsreader',Georgia,serif;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *,*::before,*::after{animation:none!important;transition:none!important} }
-  body{
-    background:var(--paper); color:var(--ink);
-    font-family:var(--serif); font-size:1.125rem; line-height:1.65;
-    -webkit-font-smoothing:antialiased;
-  }
-  .page{max-width:41rem; margin:0 auto; padding:0 1.25rem}
+  body{background:var(--night); color:var(--paper); font-family:var(--serif);
+       font-size:1.125rem; line-height:1.7; -webkit-font-smoothing:antialiased; overflow-x:hidden}
   a{color:inherit}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--red); outline-offset:3px}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--ember); outline-offset:3px}
+  ::selection{background:var(--ember); color:var(--night)}
 
-  /* header */
-  header{padding:2.25rem 0 0}
-  .brand{font-family:var(--mono); font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--pencil)}
-  .brand b{color:var(--ink); font-weight:600}
+  /* film grain over everything */
+  body::after{
+    content:""; position:fixed; inset:-50%; pointer-events:none; z-index:50; opacity:.055;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain 8s steps(10) infinite;
+  }
+  @keyframes grain{
+    0%,100%{transform:translate(0,0)} 10%{transform:translate(-5%,-8%)} 20%{transform:translate(-13%,3%)}
+    30%{transform:translate(7%,-20%)} 40%{transform:translate(-5%,20%)} 50%{transform:translate(-13%,8%)}
+    60%{transform:translate(13%,0)} 70%{transform:translate(0,13%)} 80%{transform:translate(3%,30%)} 90%{transform:translate(-10%,10%)}
+  }
 
-  /* hero — the typed correction */
-  .hero{padding:5.5rem 0 4.5rem; border-bottom:1px solid var(--rule)}
-  .hero h1{
-    font-family:var(--mono); font-weight:600;
-    font-size:clamp(1.55rem,5.2vw,2.6rem);
-    line-height:1.3; letter-spacing:-.01em; max-width:19ch;
-  }
-  .hero .strike{
-    position:relative; white-space:nowrap; color:var(--pencil);
-  }
-  .hero .strike::after{
-    content:""; position:absolute; left:-2%; right:-2%; top:54%;
-    border-top:3px solid var(--red); transform:rotate(-1.2deg);
-  }
-  .hero .verdict{color:var(--red)}
-  .hero .caret{display:inline-block; width:.55ch; background:var(--red); height:1em; vertical-align:-.12em; animation:blink 1.1s steps(1) infinite}
+  /* ---------- HERO ---------- */
+  .hero{position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; isolation:isolate}
+  .hero-img{position:absolute; inset:0; z-index:-2; overflow:hidden}
+  .hero-img img{width:100%; height:100%; object-fit:cover; object-position:center 65%;
+    filter:brightness(.72) saturate(.85); transform:scale(1.06); animation:drift 26s ease-out forwards}
+  @keyframes drift{to{transform:scale(1.0)}}
+  .hero::before{content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(180deg, rgba(14,17,22,.88) 0%, rgba(14,17,22,.25) 42%, rgba(14,17,22,.42) 70%, rgba(14,17,22,.96) 100%)}
+  .hero-top{position:absolute; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:baseline;
+    padding:1.6rem clamp(1.25rem,4vw,3.5rem); font-family:var(--mono); font-size:.78rem; letter-spacing:.16em; text-transform:uppercase}
+  .hero-top .b{font-weight:600}
+  .hero-top .r{color:var(--dim)}
+  .hero-inner{padding:0 clamp(1.25rem,4vw,3.5rem) clamp(3rem,7vh,5.5rem); max-width:74rem}
+  .typed{font-family:var(--mono); font-weight:500; font-size:clamp(1.7rem,4.6vw,3.4rem); line-height:1.32; letter-spacing:-.015em; max-width:24ch; min-height:3.9em}
+  .typed .strike{position:relative; color:var(--dim); white-space:nowrap}
+  .typed .strike::after{content:""; position:absolute; left:-2%; right:-2%; top:55%; border-top:.09em solid var(--ember); transform:rotate(-1.1deg); transform-origin:left;
+    animation:slash .28s ease-out .2s backwards}
+  @keyframes slash{from{scale:0 1}}
+  .typed .verdict{color:var(--ember)}
+  .caret{display:inline-block; width:.55ch; background:var(--ember); height:1.05em; vertical-align:-.15em; animation:blink 1.1s steps(1) infinite}
   @keyframes blink{50%{opacity:0}}
-  .hero p{margin-top:2rem; font-size:1.05rem; color:var(--pencil); max-width:34ch; font-style:italic}
+  .hero-sub{margin-top:1.6rem; font-style:italic; color:#C8C4B8; max-width:38ch; font-size:1.06rem; font-weight:300}
+  .scrollcue{position:absolute; right:clamp(1.25rem,4vw,3.5rem); bottom:clamp(3rem,7vh,5.5rem);
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.2em; color:var(--dim); writing-mode:vertical-rl}
 
-  /* sections */
-  section{padding:3.5rem 0; border-bottom:1px solid var(--rule)}
-  .eyebrow{font-family:var(--mono); font-size:.75rem; letter-spacing:.16em; text-transform:uppercase; color:var(--red); margin-bottom:1.4rem}
-  h2{font-family:var(--serif); font-weight:500; font-size:1.7rem; line-height:1.25; margin-bottom:1rem; letter-spacing:-.01em}
-  .lede{max-width:56ch}
-  .lede + .lede{margin-top:1rem}
-  em{font-style:italic}
+  /* ---------- SHELL ---------- */
+  .shell{max-width:46rem; margin:0 auto; padding:0 1.25rem}
+  section{padding:clamp(4rem,10vh,7rem) 0}
+  .eyebrow{font-family:var(--mono); font-size:.74rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ember); margin-bottom:1.6rem; display:flex; align-items:center; gap:.9rem}
+  .eyebrow::after{content:""; height:1px; flex:1; background:var(--rule)}
+  h2{font-weight:400; font-size:clamp(1.7rem,3.4vw,2.3rem); line-height:1.25; letter-spacing:-.01em; margin-bottom:1.2rem}
+  .lede{max-width:58ch; color:#D6D3C9}
+  .lede+.lede{margin-top:1.1rem}
+  .pull{margin:2.4rem 0 0; padding-left:1.4rem; border-left:2px solid var(--ember);
+    font-style:italic; font-size:1.35rem; line-height:1.5; color:var(--paper); max-width:30ch; font-weight:300}
 
-  /* the ledger of lessons */
-  .ledger{margin:2rem 0 0; list-style:none}
-  .ledger li{
-    display:grid; grid-template-columns:4.5ch 1fr; gap:1rem;
-    padding:.85rem 0; border-top:1px solid var(--rule);
-    font-family:var(--serif); font-size:1.15rem;
+  /* reveal on scroll */
+  .rv{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease}
+  .rv.in{opacity:1; transform:none}
+
+  /* ---------- THE LEDGER ---------- */
+  .ledger-wrap{background:var(--night2); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)}
+  .ledger{list-style:none; margin-top:2.2rem; font-variant-numeric:tabular-nums}
+  .ledger li{display:grid; grid-template-columns:4ch 1fr; gap:1.1rem; align-items:baseline;
+    padding:.62rem 0; border-top:1px dashed var(--rule); font-size:1.08rem}
+  .ledger li:last-child{border-bottom:1px dashed var(--rule)}
+  .ledger .no{font-family:var(--mono); font-size:.8rem; color:var(--ember)}
+  .ledger .redacted{position:relative; color:transparent; user-select:none; overflow:hidden}
+  .ledger .redacted .bar{position:absolute; inset:.42em 40% .32em 0; background:repeating-linear-gradient(90deg,var(--ember-deep) 0 6px, #8E2A1B 6px 12px); opacity:.78; border-radius:1px}
+  .ledger li:nth-child(2n) .redacted .bar{right:22%}
+  .ledger li:nth-child(3n) .redacted .bar{right:52%}
+  .ledger .hint{font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:var(--dim); position:absolute; left:0; top:.35em; opacity:0; transition:opacity .25s}
+  .ledger li:hover .hint{opacity:1}
+  .ledger li:hover .redacted .bar{opacity:.25}
+  .ledger-note{margin-top:1.4rem; font-family:var(--mono); font-size:.76rem; color:var(--dim)}
+  .ledger-note b{color:var(--ember); font-weight:500}
+
+  /* receipts strip */
+  .receipts{display:grid; grid-template-columns:repeat(auto-fit,minmax(9rem,1fr)); gap:1px; background:var(--rule);
+    border:1px solid var(--rule); margin-top:3rem}
+  .receipts div{background:var(--night); padding:1.4rem 1.2rem}
+  .receipts .v{font-family:var(--mono); font-weight:600; font-size:1.5rem; letter-spacing:-.02em}
+  .receipts .v em{color:var(--ember); font-style:normal}
+  .receipts .k{font-family:var(--mono); font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-top:.4rem}
+
+  /* buy */
+  .buy{margin-top:2.6rem; display:flex; flex-wrap:wrap; gap:.8rem}
+  .buy a{font-family:var(--mono); font-size:.86rem; text-decoration:none; border:1px solid var(--rule);
+    padding:.85rem 1.25rem; border-radius:2px; display:inline-flex; gap:.8ch; align-items:baseline;
+    background:var(--night2); transition:border-color .2s, background .2s, transform .2s}
+  .buy a:hover{border-color:var(--paper); transform:translateY(-2px)}
+  .buy a .p{color:var(--dim)}
+  .buy a.primary{background:var(--ember); border-color:var(--ember); color:#16100E; font-weight:600}
+  .buy a.primary .p{color:#16100EAA}
+  .buy a.primary:hover{background:#F0563C; border-color:#F0563C}
+  .buy-note{margin-top:1rem; font-family:var(--mono); font-size:.74rem; color:var(--dim)}
+
+  /* about */
+  .about p{max-width:56ch; color:#D6D3C9}
+  .about p+p{margin-top:1.1rem}
+  .sig{margin-top:2rem; font-family:var(--mono); font-size:.85rem; color:var(--dim)}
+  .sig .x{color:var(--ember)}
+
+  /* next book */
+  .next{position:relative; isolation:isolate; border-top:1px solid var(--rule)}
+  .next .eyebrow{color:var(--dim)}
+  .next .eyebrow::after{background:var(--rule)}
+  .next h2 em{font-style:italic; color:var(--ember)}
+  .next p{max-width:52ch; color:var(--dim); font-style:italic}
+
+  footer{border-top:1px solid var(--rule); padding:2.4rem clamp(1.25rem,4vw,3.5rem) 3.2rem;
+    font-family:var(--mono); font-size:.74rem; color:var(--dim);
+    display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  footer a{color:var(--dim)}
+  footer a:hover{color:var(--paper)}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none!important; transition:none!important}
+    .rv{opacity:1; transform:none}
+    html{scroll-behavior:auto}
   }
-  .ledger li:last-child{border-bottom:1px solid var(--rule)}
-  .ledger .no{font-family:var(--mono); font-size:.85rem; color:var(--red); padding-top:.28rem; font-variant-numeric:tabular-nums}
-  .ledger .rest{color:var(--pencil); font-style:italic}
-
-  /* buy row */
-  .buy{margin-top:2.25rem; display:flex; flex-wrap:wrap; gap:.75rem}
-  .buy a{
-    font-family:var(--mono); font-size:.85rem; text-decoration:none;
-    border:1.5px solid var(--ink); padding:.7rem 1.1rem; border-radius:2px;
-    display:inline-flex; gap:.7ch; align-items:baseline;
-    transition:background .15s,color .15s;
+  @media (max-width:600px){
+    .typed{min-height:0}
+    .scrollcue{display:none}
   }
-  .buy a .p{color:var(--pencil)}
-  .buy a:hover{background:var(--ink); color:var(--paper)}
-  .buy a:hover .p{color:inherit}
-  .buy a.primary{background:var(--red); border-color:var(--red); color:#F6F3EE}
-  .buy a.primary .p{color:#F6F3EEBB}
-  .buy a.primary:hover{background:var(--ink); border-color:var(--ink)}
-  .note{margin-top:.9rem; font-family:var(--mono); font-size:.75rem; color:var(--pencil)}
-
-  /* about letter */
-  .about p{max-width:56ch}
-  .about p + p{margin-top:1rem}
-  .sig{margin-top:1.6rem; font-family:var(--mono); font-size:.85rem; color:var(--pencil)}
-
-  /* next */
-  .next p{max-width:56ch; font-style:italic; color:var(--pencil)}
-
-  footer{padding:2.5rem 0 3.5rem; font-family:var(--mono); font-size:.75rem; color:var(--pencil); display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap}
-  footer a{color:var(--pencil)}
 </style>
 </head>
 <body>
-<div class="page">
 
-  <header>
-    <div class="brand"><b>C.M ENGUE</b> · WRITES FROM SINGAPORE</div>
-  </header>
-
-  <section class="hero" aria-label="Introduction">
-    <h1>At twenty-five, you think you have time.<br>
-      <span class="strike">You do.</span> <span class="verdict">You don't.</span><span class="caret" aria-hidden="true"></span>
+<header class="hero">
+  <div class="hero-img" aria-hidden="true"><img src="assets/pier.jpg" alt="" fetchpriority="high"></div>
+  <div class="hero-top">
+    <span class="b">C.M ENGUE</span>
+    <span class="r">WRITES FROM SINGAPORE</span>
+  </div>
+  <div class="hero-inner">
+    <h1 class="typed" id="typed" aria-label="At twenty-five, you think you have time. You don't.">
+      <span id="typebox"></span><span class="caret" id="caret" aria-hidden="true"></span>
     </h1>
-    <p>Lessons learned the expensive way, written down for the people still in time to use them.</p>
-  </section>
+    <p class="hero-sub">Lessons learned the expensive way, written down for the people still in time to use them.</p>
+  </div>
+  <span class="scrollcue" aria-hidden="true">READ ON ↓</span>
+</header>
 
-  <section aria-labelledby="book">
-    <div class="eyebrow">The book · published November 2025</div>
-    <h2 id="book">25 Things I Wished I Knew at 25</h2>
-    <p class="lede">This is not a self-help book. This is a confession. Written as a letter to his younger sister, C.M. Engue lays bare the lessons he learned the expensive way — wasting $300,000 on things that didn't matter, choosing work over family until it was almost too late, and treating his body like it would run forever until it suddenly didn't.</p>
-    <p class="lede">Twenty-five chapters. No sugarcoating. It's what your older brother would tell you if he loved you enough to be brutal.</p>
-
-    <ul class="ledger">
-      <li><span class="no">01</span><span>This version of you will never exist again.</span></li>
-      <li><span class="no">02</span><span>Build yourself like no one is watching.</span></li>
-      <li><span class="no">03</span><span>The world doesn't revolve around you.</span></li>
-      <li><span class="no">—</span><span class="rest">…and twenty-two more, each one paid for in full.</span></li>
-    </ul>
-
-    <div class="buy">
-      <a class="primary" href="https://www.amazon.com/dp/B0G1LJJ4ZQ">Kindle <span class="p">$3.99</span></a>
-      <a href="https://www.amazon.com/dp/B0G1LKVW53">Paperback <span class="p">$10</span></a>
-      <a href="https://www.amazon.com/dp/B0G1MG9YVQ">Hardcover <span class="p">$18</span></a>
+<main>
+  <section aria-labelledby="confession">
+    <div class="shell rv">
+      <div class="eyebrow">The book · published November 2025</div>
+      <h2 id="confession">This is not a self-help book.<br>This is a confession.</h2>
+      <p class="lede">Written as a letter to his younger sister, <em>25 Things I Wished I Knew at 25</em> lays bare the lessons C.M Engue learned the expensive way — wasting $300,000 on things that didn't matter, choosing work over family until it was almost too late, and treating his body like it would run forever until it suddenly didn't.</p>
+      <p class="pull">It's what your older brother would tell you — if he loved you enough to be brutal.</p>
     </div>
-    <p class="note">Free to read on Kindle Unlimited. Sample the first pages on Amazon.</p>
   </section>
 
-  <section class="about" aria-labelledby="about">
-    <div class="eyebrow">About the author</div>
-    <h2 id="about">The notes were never meant to be a book.</h2>
-    <p>C.M Engue writes about the things most people take a decade to figure out.</p>
-    <p>His first book started as a private notes file — lessons about money, work, and relationships he kept wishing someone had told him earlier. When his sister turned twenty-five, he wrote them down for her. The book that resulted is direct, personal, and built for people still working out what they actually want from their lives.</p>
-    <p>He lives and works in Singapore.</p>
-    <p class="sig">— C.M E.</p>
+  <section class="ledger-wrap" aria-labelledby="ledger-h">
+    <div class="shell rv">
+      <div class="eyebrow">The ledger · 25 entries</div>
+      <h2 id="ledger-h">Three you can read. Twenty-two you can't.</h2>
+      <ul class="ledger">
+        <li><span class="no">01</span><span>This version of you will never exist again.</span></li>
+        <li><span class="no">02</span><span>Build yourself like no one is watching.</span></li>
+        <li><span class="no">03</span><span>The world doesn't revolve around you.</span></li>
+        <li><span class="no">04</span><span class="redacted"><span class="bar"></span><span class="hint">in the book</span>The people who stay are rare</span></li>
+        <li><span class="no">05</span><span class="redacted"><span class="bar"></span><span class="hint">in the book</span>Money is a language</span></li>
+        <li><span class="no">06</span><span class="redacted"><span class="bar"></span><span class="hint">in the book</span>Your health is on loan</span></li>
+        <li><span class="no">07</span><span class="redacted"><span class="bar"></span><span class="hint">in the book</span>redacted</span></li>
+        <li><span class="no">08</span><span class="redacted"><span class="bar"></span><span class="hint">in the book</span>redacted</span></li>
+        <li><span class="no">…</span><span class="redacted"><span class="bar"></span><span class="hint">entries 09–24, in the book</span>redacted</span></li>
+        <li><span class="no">25</span><span class="redacted"><span class="bar"></span><span class="hint">the one that hurts. in the book</span>redacted</span></li>
+      </ul>
+      <p class="ledger-note">Every entry <b>paid for in full</b> before it was written down.</p>
+
+      <div class="receipts" role="list" aria-label="The receipts">
+        <div role="listitem"><div class="v"><em>$300K</em></div><div class="k">tuition, the hard way</div></div>
+        <div role="listitem"><div class="v">25</div><div class="k">chapters, no sugarcoating</div></div>
+        <div role="listitem"><div class="v">135</div><div class="k">pages, one sitting</div></div>
+        <div role="listitem"><div class="v">1</div><div class="k">sister it was written for</div></div>
+      </div>
+
+      <div class="buy">
+        <a class="primary" href="https://www.amazon.com/dp/B0G1LJJ4ZQ">Kindle <span class="p">$3.99</span></a>
+        <a href="https://www.amazon.com/dp/B0G1LKVW53">Paperback <span class="p">$10</span></a>
+        <a href="https://www.amazon.com/dp/B0G1MG9YVQ">Hardcover <span class="p">$18</span></a>
+      </div>
+      <p class="buy-note">Free with Kindle Unlimited · Sample the first pages on Amazon</p>
+    </div>
   </section>
 
-  <section class="next" aria-labelledby="next">
-    <div class="eyebrow">Currently writing</div>
-    <h2 id="next">A novel, set in Singapura, 1733.</h2>
-    <p>A merchant, a monsoon, and a woman who is not who she says she is. More when it's ready.</p>
+  <section class="about" aria-labelledby="about-h">
+    <div class="shell rv">
+      <div class="eyebrow">About the author</div>
+      <h2 id="about-h">The notes were never meant to be a book.</h2>
+      <p>C.M Engue writes about the things most people take a decade to figure out.</p>
+      <p>His first book started as a private notes file — lessons about money, work, and relationships he kept wishing someone had told him earlier. When his sister turned twenty-five, he wrote them down for her. The book that resulted is direct, personal, and built for people still working out what they actually want from their lives.</p>
+      <p>He lives and works in Singapore.</p>
+      <p class="sig"><span class="x">—</span> C.M E.</p>
+    </div>
   </section>
 
-  <footer>
-    <span>© 2026 C.M Engue</span>
-    <a href="https://www.amazon.com/dp/B0G1LJJ4ZQ">Find the book on Amazon</a>
-  </footer>
+  <section class="next" aria-labelledby="next-h">
+    <div class="shell rv">
+      <div class="eyebrow">Currently writing</div>
+      <h2 id="next-h">A novel. <em>Singapura, 1733.</em></h2>
+      <p>A merchant, a monsoon, and a woman who is not who she says she is. More when it's ready.</p>
+    </div>
+  </section>
+</main>
 
-</div>
+<footer>
+  <span>© 2026 C.M Engue</span>
+  <a href="https://www.amazon.com/dp/B0G1LJJ4ZQ">Find the book on Amazon</a>
+</footer>
+
+<script>
+(function(){
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var box = document.getElementById('typebox');
+  var final1 = 'At twenty-five, you think you have time.<br><span class="strike">You do.</span> <span class="verdict">You don’t.</span>';
+  if (reduced){ box.innerHTML = final1; }
+  else {
+    var line = 'At twenty-five, you think you have time.';
+    var i = 0;
+    (function tick(){
+      if (i <= line.length){ box.textContent = line.slice(0, i); i++; setTimeout(tick, 34); }
+      else {
+        setTimeout(function(){
+          box.innerHTML = line + '<br><span class="strike">You do.</span>';
+          setTimeout(function(){ box.innerHTML = final1; }, 650);
+        }, 350);
+      }
+    })();
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+})();
+</script>
 </body>
 </html>
